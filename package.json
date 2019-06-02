@@ -1,0 +1,15 @@
+{
+  "name": "yardage",
+  "version": "1.0.0",
+  "description": "CRUD application to track fabric stash and crafting ideas",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michelle Pitts",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.17.1"
+  }
+}
