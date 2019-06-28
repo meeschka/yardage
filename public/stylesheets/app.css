@@ -1,0 +1,33 @@
+body {
+  font-family: 'Nunito', sans-serif;
+  background: #f5d9d5;
+}
+#mainNav {
+  font-size: 1.5rem;
+  font-weight: 200;
+
+}
+#mainNav .nav-link {
+  color: white;
+
+}
+#mainNav .nav-link:hover {
+  color: #EA1C2C;
+}
+
+#mainNav .navbar-brand {
+  color: #EA1C2C;
+  font-size: 1.5rem;
+}
+
+header {
+  animation: 1s fadein 0.5s forwards;
+  opacity: 0;
+  padding-bottom: 50px;
+}
+
+@keyframes fadein {
+  100% {
+    opacity: 1;
+  }
+}
