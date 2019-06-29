@@ -5,7 +5,14 @@ body {
 #mainNav {
   font-size: 1.5rem;
   font-weight: 200;
-
+  background-color: #f5d9d5;
+  animation: 1s fadein 0.5s forwards;
+  opacity: 0;
+}
+@keyframes fadein {
+  100% {
+    opacity: 1;
+  }
 }
 #mainNav .nav-link {
   color: white;
@@ -18,16 +25,141 @@ body {
 #mainNav .navbar-brand {
   color: #EA1C2C;
   font-size: 1.5rem;
+  font-weight: 400;
 }
 
-header {
-  animation: 1s fadein 0.5s forwards;
+a.btn {
+  border-radius: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: white;
+  color: #EA1C2C;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100px 80px;
+}
+
+.hero {
+  position: relative;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  min-height: 100vh;
+}
+
+.hero .background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  z-index: -1;
+  background-color: #EA1C2C;
+  font-weight: 300;
+}
+
+.hero h1 {
+  font-size: 60px;
+  margin-bottom: 15px;
+}
+
+.hero h3 {
+  font-weight: 200;
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.hero-content {
   opacity: 0;
-  padding-bottom: 50px;
+  margin-top: 100px;
+  animation: 1s slidefade 1s forwards;
 }
-
-@keyframes fadein {
+@keyframes slidefade {
   100% {
     opacity: 1;
+    margin: 0;
   }
+}
+
+h3.title{
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+section ul {
+list-style-type: none;
+}
+
+section:not(.hero):nth-child(even){
+  background-color: #fff;
+  color: #EA1C2C;
+}
+
+.grid {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+hr {
+  width: 250px;
+  height: 3px;
+  background-color: #EA1C2C;
+  border: 0;
+  margin-bottom: 50px;
+}
+
+.title {
+  text-transform: capitalize;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+section p {
+  max-width: 775px;
+  line-height: 2;
+  padding: 0 20px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+.features .grid li {
+  padding: 50px;
+  text-align: center;
+}
+
+.features .grid li i {
+  color: #EA1C2C;
+}
+
+.features .grid li h4 {
+  font-size: 30px;
+  margin: 25px 0;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #f5d9d5;
+  color: #EA1C2C;
+  padding: 20px 0;
+}
+
+footer ul {
+  display: flex;
+  list-style-type: none;
+}
+
+footer ul li {
+  margin-left: 16px;
+}
+
+footer p {
+  align-self: center;
 }
