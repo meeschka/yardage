@@ -1,6 +1,6 @@
 body {
   font-family: 'Nunito', sans-serif;
-  background: #f5d9d5;
+  background: white;
 }
 #mainNav {
   font-size: 1.5rem;
@@ -8,6 +8,7 @@ body {
   background-color: #f5d9d5;
   animation: 1s fadein 0.5s forwards;
   opacity: 0;
+  padding-bottom: 30px;
 }
 @keyframes fadein {
   100% {
@@ -89,6 +90,7 @@ section {
 h3.title{
   font-weight: 300;
   text-transform: uppercase;
+  color: #EA1C2C;
 }
 
 section ul {
@@ -162,4 +164,8 @@ footer ul li {
 
 footer p {
   align-self: center;
+}
+
+footer ul li i {
+  color: white;
 }

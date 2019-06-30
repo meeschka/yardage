@@ -1,0 +1,13 @@
+<% include ../partials/header %>
+FABRICSSSS
+
+<% fabrics.forEach(function(fabric){ %>
+  <div>
+    <h3><%= fabric.name %></h3>
+    <img src="<%=fabric.image%>""/>
+    <p>
+    <%= fabric.description %>  
+    </p>
+    </div>
+<% }); %>
+<% include ../partials/footer %>
