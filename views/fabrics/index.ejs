@@ -1,13 +1,21 @@
 <% include ../partials/header %>
-FABRICSSSS
-
-<% fabrics.forEach(function(fabric){ %>
-  <div>
-    <h3><%= fabric.name %></h3>
-    <img src="<%=fabric.image%>""/>
-    <p>
-    <%= fabric.description %>  
-    </p>
+<section class="jumbotron text-center mini-header">
+  <h1 class="display-3">Fabrics</h1>
+  <a class="btn" href="#">Add a New Fabric</a>
+</section>
+<section class="gallery">
+  <div class="container">
+    <% fabrics.forEach(function(fabric){ %>
+      <div class="card" style="width: 18rem;">
+      <img src="<%=fabric.image%>" class="card-img-top" alt="<%=fabric.name%>">
+      <div class="card-body">
+        <h5 class="card-title"><%= fabric.name %></h5>
+        <p class="card-text"><%= fabric.description %></p>
+        <a href="#" class="btn btn-primary card-btn">More details</a>
+      </div>
     </div>
-<% }); %>
+    <% }); %>
+  </div>
+</section>
+
 <% include ../partials/footer %>

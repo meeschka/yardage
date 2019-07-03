@@ -169,3 +169,17 @@ footer p {
 footer ul li i {
   color: white;
 }
+
+
+.mini-header {
+  margin-top: 30px;
+  background: url("../assets/pinkfabric.jpg");
+}
+.mini-header h1 {
+  color: white;
+}
+.card-btn {
+  display: flex;
+  justify-content: center;
+  border-color: #EA1C2C;
+}
