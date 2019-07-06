@@ -1,6 +1,7 @@
 body {
   font-family: 'Nunito', sans-serif;
   background: white;
+  height: 100%
 }
 #mainNav {
   font-size: 1.5rem;
@@ -102,7 +103,7 @@ section:not(.hero):nth-child(even){
   color: #EA1C2C;
 }
 
-.grid {
+.list {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -165,16 +166,16 @@ section p {
   background-color: #EA1C2C;
   border-color: #EA1C2C;
 }
-.features .grid li {
+.features .list li {
   padding: 50px;
   text-align: center;
 }
 
-.features .grid li i {
+.features .list li i {
   color: #EA1C2C;
 }
 
-.features .grid li h4 {
+.features .list li h4 {
   font-size: 30px;
   margin: 25px 0;
 }
@@ -185,7 +186,6 @@ footer {
   justify-content: space-around;
   background-color: #f5d9d5;
   color: #EA1C2C;
-  padding: 20px 0;
 }
 
 footer ul {
