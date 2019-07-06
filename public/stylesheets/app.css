@@ -29,7 +29,7 @@ body {
   font-weight: 400;
 }
 
-a.btn {
+.btn {
   border-radius: 4px;
   text-transform: uppercase;
   text-align: center;
@@ -155,7 +155,12 @@ section p {
 .card-body{
   padding: 1rem;
 }
-a.card-btn:hover {
+.card-btn {
+  display: flex;
+  justify-content: center;
+  border-color: #EA1C2C;
+}
+.card-btn:hover {
   color: white;
   background-color: #EA1C2C;
   border-color: #EA1C2C;
@@ -208,8 +213,15 @@ footer ul li i {
 .mini-header h1 {
   color: white;
 }
-.card-btn {
-  display: flex;
+
+.form-row {
   justify-content: center;
+}
+
+.form-control {
+  text-align: center;
+}
+.form-control:focus{
   border-color: #EA1C2C;
+  box-shadow: 0 0 0 0.2rem rgba(234, 28, 44, .25) ;
 }
