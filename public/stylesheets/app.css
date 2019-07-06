@@ -123,12 +123,28 @@ hr {
   text-align: center;
 }
 
+.grid-item {
+  width: 33%;
+}
+
 section p {
   max-width: 775px;
   line-height: 2;
   padding: 0 20px;
   margin-bottom: 30px;
   text-align: center;
+}
+.card {
+  margin: 20px;
+}
+.card-text {
+  padding: 0;
+  text-align: left;
+}
+.card-btn:hover {
+  color: white;
+  background-color: #EA1C2C;
+  border-color: #EA1C2C;
 }
 .features .grid li {
   padding: 50px;
