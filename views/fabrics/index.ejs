@@ -3,21 +3,24 @@
   <h1 class="display-3">Fabrics</h1>
   <a class="btn" href="/fabrics/new">Add a New Fabric</a>
 </section>
-<section class="gallery p-2 p-md-3 p-lg-5">
-  <div class="grid">
+<section class="gallery">
+  <div class="row">
     <% fabrics.forEach(function(fabric){ %>
-      <div class="grid-item">
-        <div class="card m-2">
+      <div class="col-sm-6 col-md-4 col-lg-3 brick">
+        <div class="card m-1">
           <img src="<%=fabric.image%>" class="card-img-top" alt="<%=fabric.name%>">
           <div class="card-body">
             <h5 class="card-title"><%= fabric.name %></h5>
             <p class="card-text"><%= fabric.description %></p>
             <a href="#" class="btn btn-primary card-btn">More details</a>
           </div>
-        </div>
+          </div>
+
         </div>
     <% }); %>
     </div>
+
 </section>
+
 
 <% include ../partials/footer %>

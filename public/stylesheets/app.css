@@ -21,11 +21,11 @@ body {
 
 }
 #mainNav .nav-link:hover {
-  color: #EA1C2C;
+  color: #d10f49;
 }
 
 #mainNav .navbar-brand {
-  color: #EA1C2C;
+  color: #d10f49;
   font-size: 1.5rem;
   font-weight: 400;
 }
@@ -35,7 +35,7 @@ body {
   text-transform: uppercase;
   text-align: center;
   background-color: white;
-  color: #EA1C2C;
+  color: #d10f49;
 }
 
 section {
@@ -50,7 +50,7 @@ section {
   justify-content: center;
   text-align: center;
   color: white;
-  min-height: 100vh;
+  min-: 100vh;
 }
 
 .hero .background-image {
@@ -61,7 +61,7 @@ section {
   height: 100%;
   background-size: cover;
   z-index: -1;
-  background-color: #EA1C2C;
+  background-color: #d10f49;
   font-weight: 300;
 }
 
@@ -91,7 +91,7 @@ section {
 h3.title{
   font-weight: 300;
   text-transform: uppercase;
-  color: #EA1C2C;
+  color: #d10f49;
 }
 
 section ul {
@@ -100,7 +100,7 @@ list-style-type: none;
 
 section:not(.hero):nth-child(even){
   background-color: #fff;
-  color: #EA1C2C;
+  color: #d10f49;
 }
 
 .list {
@@ -113,7 +113,7 @@ section:not(.hero):nth-child(even){
 hr {
   width: 250px;
   height: 3px;
-  background-color: #EA1C2C;
+  background-color: #d10f49;
   border: 0;
   margin-bottom: 50px;
 }
@@ -124,21 +124,11 @@ hr {
   text-align: center;
 }
 
-.grid-item {
-  width: 100%;
+.gallery {
+  width = 100%;
+  margin: 0 auto;
 }
-@media screen and (min-width: 576px) {
-/* 5 columns for larger screens */
-.grid-item { width: 50%; }
-}
-@media screen and (min-width: 768px) {
-/* 5 columns for larger screens */
-.grid-item { width: 33%; }
-}
-@media screen and (min-width: 1200px) {
-/* 5 columns for larger screens */
-.grid-item { width: 25%; }
-}
+
 section p {
   max-width: 775px;
   line-height: 2;
@@ -159,12 +149,15 @@ section p {
 .card-btn {
   display: flex;
   justify-content: center;
-  border-color: #EA1C2C;
+  border-color: #d10f49;
 }
 .card-btn:hover {
   color: white;
-  background-color: #EA1C2C;
-  border-color: #EA1C2C;
+  background-color: #d10f49;
+  border-color: #d10f49;
+}
+.card-img-top {
+  max-width: 100%;
 }
 .features .list li {
   padding: 50px;
@@ -172,7 +165,7 @@ section p {
 }
 
 .features .list li i {
-  color: #EA1C2C;
+  color: #d10f49;
 }
 
 .features .list li h4 {
@@ -185,7 +178,7 @@ footer {
   align-items: center;
   justify-content: space-around;
   background-color: #f5d9d5;
-  color: #EA1C2C;
+  color: #d10f49;
 }
 
 footer ul {

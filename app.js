@@ -1,9 +1,31 @@
 var express = require("express");
 var bodyParser = require("body-parser");
+var mongoose = require("mongoose");
+
+mongoose.connect("mongodb://localhost:27017/fabrics", {useNewUrlParser: true});
 
 var app = express();
 var port = 3000;
 
+//schema setup
+var fabricSchema = new mongoose.Schema({
+  name: String,
+  image: String,
+  description: String
+});
+var Fabric = mongoose.model("Fabric", fabricSchema);
+// Fabric.create({
+//   name: "Cotton broadcloth",
+//   image: "/assets/fabric2.jpg",
+//   description: "A bunch of basic white cotton broadcloth, stocked up at a clearance sale"
+// }, function(err, fabric){
+//   if(err) {
+//     console.log(err);
+//   } else {
+//     console.log("Newly created fabric: ");
+//     console.log(fabric);
+//   }
+// })
 
 app.use(bodyParser.urlencoded({extended:true}));
 
@@ -48,8 +70,14 @@ app.get("/", function(req, res){
 });
 
 app.get("/fabrics", function(req, res){
+  Fabric.find({}, function(err, allFabrics){
+    if(err) {
+      console.log(err);
+    } else {
+      res.render("fabrics/index", {fabrics: allFabrics});
+    }
+  })
 
-  res.render("fabrics/index", {fabrics: tempFabricsArray});
 })
 
 app.post("/fabrics", function(req, res){
