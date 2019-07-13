@@ -104,3 +104,13 @@ app.get("/fabrics/new", function(req, res){
 app.listen(port, ()=>{
     console.log("Server has started");
 });
+
+app.get("/fabrics/:id", function(req, res){
+  Fabric.findById(req.params.id, function(err, fabric){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("fabrics/show", {fabric: fabric});
+    }
+  })
+});
