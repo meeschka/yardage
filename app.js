@@ -87,9 +87,14 @@ app.post("/fabrics", function(req, res){
     image: req.body.image,
     description: req.body.description
   }
-  tempFabricsArray.push(newFabric);
-  res.redirect("/fabrics");
-  //redirect back to fabrics
+  Fabric.create(newFabric, function(err, fabric){
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/fabrics");
+      //redirect back to fabrics
+    }
+  })
 })
 
 app.get("/fabrics/new", function(req, res){
