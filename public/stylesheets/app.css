@@ -42,7 +42,10 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px 80px;
+  padding: 50px 80px;
+}
+.extra-space {
+  padding-top:120px;
 }
 
 .hero {
@@ -118,6 +121,14 @@ hr {
   margin-bottom: 50px;
 }
 
+.show {
+  max-width: 100%;
+  max-height: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  display:block;
+}
+
 .title {
   text-transform: capitalize;
   margin-bottom: 30px;
@@ -148,16 +159,26 @@ section p {
 }
 .card-btn {
   display: flex;
+}
+.btn-primary {
   justify-content: center;
   border-color: #d10f49;
 }
-.card-btn:hover {
+.btn-primary:hover {
   color: white;
   background-color: #d10f49;
   border-color: #d10f49;
 }
 .card-img-top {
   max-width: 100%;
+}
+.btn-show {
+  width: 100%;
+  margin: 1rem;
+}
+.btn-div {
+  display:flex;
+  justify-content: space-around;
 }
 .features .list li {
   padding: 50px;
