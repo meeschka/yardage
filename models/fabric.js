@@ -1,11 +1,11 @@
 var mongoose = require("mongoose");
 
-var fabricSchema = new mongoose.Schema({
+var FabricSchema = new mongoose.Schema({
   name: String,
   image: String,
   description: String
 });
-module.exports = mongoose.model("Fabric", fabricSchema);
+module.exports = mongoose.model("Fabric", FabricSchema);
 // Fabric.create({
 //   name: "Cotton broadcloth",
 //   image: "/assets/fabric2.jpg",
