@@ -96,3 +96,12 @@ app.post("/register", function(req, res){
       })
   });
 })
+app.get("/login", function(req, res){
+  res.render("auth/login");
+})
+app.post("/login", passport.authenticate("local",
+  {successRedirect:"/fabrics",
+  failureRedirect:"/login"}),
+  function(req, res){
+    res.send("LOGIN LOGIC HAPPENS HERE");
+})
