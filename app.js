@@ -45,7 +45,7 @@ app.get("/fabrics", function(req, res){
 
 })
 
-app.post("/fabrics", function(req, res){
+app.post("/fabrics", isLoggedIn, function(req, res){
   //get data from form, add to fabrics db
   var newFabric = {
     name: req.body.name,
@@ -62,13 +62,9 @@ app.post("/fabrics", function(req, res){
   })
 })
 
-app.get("/fabrics/new", function(req, res){
+app.get("/fabrics/new", isLoggedIn, function(req, res){
   res.render("fabrics/new");
 })
-
-app.listen(port, ()=>{
-    console.log("Server has started");
-});
 
 app.get("/fabrics/:id", function(req, res){
   Fabric.findById(req.params.id, function(err, fabric){
@@ -105,3 +101,16 @@ app.post("/login", passport.authenticate("local",
   function(req, res){
     res.send("LOGIN LOGIC HAPPENS HERE");
 })
+app.get("/logout", function(req, res){
+  req.logout();
+  res.redirect("/fabrics");
+})
+
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  } res.redirect("/login");
+}
+app.listen(port, ()=>{
+    console.log("Server has started");
+});
