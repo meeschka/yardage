@@ -17,9 +17,14 @@
         <a class="nav-link" href="/fabrics">FABRICS</a>
         <a class="nav-link">PROJECTS</a>
         <div class="navbar-nav ml-auto">
-          <a class="nav-link" href="/login">  <i class="fas fa-user mr-1 ml-2"></i> LOGIN</a>
-          <a class="nav-link" href="/register"><i class="fas fa-user-plus mr-1 ml-2"></i>SIGNUP</a>
-          <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt mr-1 ml-2"></i>LOGOUT</a>
+          <% if(!currentUser) { %>
+            <% console.log(currentUser); %>
+            <a class="nav-link" href="/login">  <i class="fas fa-user mr-1 ml-2"></i> LOGIN</a>
+            <a class="nav-link" href="/register"><i class="fas fa-user-plus mr-1 ml-2"></i>SIGNUP</a>
+          <% } else { %>
+            <a class="nav-link" href="#">Signed in as <%=currentUser.username%></a>
+            <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt mr-1 ml-2"></i>LOGOUT</a>
+          <% } %>
         </div>
       </div>
     </nav>
