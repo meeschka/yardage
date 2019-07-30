@@ -45,6 +45,27 @@ router.get("/:id", function(req, res){
     }
   })
 });
+
+//edit fabric routes
+router.get("/:id/edit", function(req, res){
+  Fabric.findById(req.params.id, function(err, fabric){
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("fabrics/edit", {fabric: fabric});
+    }
+  })
+})
+//update fabric route
+router.put("/:id", function(req, res){
+  Fabric.findByIdAndUpdate(req.params.id, req.body.fabric, function(err, fabric){
+    if (err) {
+      res.redirect("/fabric");
+    } else {
+      res.redirect("/fabrics/"+req.params.id);
+    }
+  })
+})
 //login middleware
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
