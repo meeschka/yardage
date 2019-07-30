@@ -239,3 +239,7 @@ footer ul li i {
   border-color: #EA1C2C;
   box-shadow: 0 0 0 0.2rem rgba(234, 28, 44, .25) ;
 }
+
+#delete {
+  display: inline;
+}

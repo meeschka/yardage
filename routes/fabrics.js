@@ -66,6 +66,16 @@ router.put("/:id", function(req, res){
     }
   })
 })
+
+//destroy route
+router.delete("/:id", function(req, res){
+  Fabric.findByIdAndRemove(req.params.id, function(err){
+    if (err) {
+      res.redirect("/fabrics");
+    } else res.redirect("/fabrics");
+  })
+})
+
 //login middleware
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
