@@ -1,14 +1,17 @@
 <% include ../partials/header %>
+
 <section class="jumbotron text-center mini-header">
   <h1 class="display-3">Edit <%=fabric.name%></h1>
   <a class="btn" href="/fabrics">Back to Fabrics</a>
 </section>
 <div class="row form-row m-5">
-  <form action="/fabrics/<%=fabric._id%>?_method=PUT" method="post">
+  <form action="/fabrics/<%=fabric._id%>?_method=PUT" method="post" class="fabric-form">
     <input class="form-control my-1" type="text" name="fabric[name]" value="<%=fabric.name%>"/>
     <input class="form-control my-1" type="text" name="fabric[image]" value="<%=fabric.image%>"/>
     <input class="form-control my-1" type="text" name="fabric[description]" value="<%=fabric.description%>"/>
     <button id="delete" class="btn btn-primary btn-show btn-block">Submit</button>
   </form>
   </div>
+
+
 <% include ../partials/footer %>

@@ -1,12 +1,15 @@
+html {
+  height: 100%;
+}
 body {
   font-family: 'Nunito', sans-serif;
   background: white;
-  min-height: 100%
+  min-height: 100%;
+  position: relative
 }
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%
+
+.fabric-form {
+  width: 800px;
 }
 #mainNav {
   font-size: 1.5rem;
@@ -200,6 +203,9 @@ section p {
 }
 
 footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
