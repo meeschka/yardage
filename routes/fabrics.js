@@ -47,32 +47,22 @@ router.get("/:id", function(req, res){
 });
 
 //edit fabric routes
-router.get("/:id/edit", function(req, res){
+router.get("/:id/edit", checkOwner, function(req, res){
   Fabric.findById(req.params.id, function(err, fabric){
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("fabrics/edit", {fabric: fabric});
-    }
+    res.render("fabrics/edit", {fabric: fabric});
   })
 })
 //update fabric route
-router.put("/:id", function(req, res){
+router.put("/:id", checkOwner, function(req, res){
   Fabric.findByIdAndUpdate(req.params.id, req.body.fabric, function(err, fabric){
-    if (err) {
-      res.redirect("/fabric");
-    } else {
-      res.redirect("/fabrics/"+req.params.id);
-    }
+    res.redirect("/fabrics/"+req.params.id);
   })
 })
 
 //destroy route
-router.delete("/:id", function(req, res){
+router.delete("/:id", checkOwner, function(req, res){
   Fabric.findByIdAndRemove(req.params.id, function(err){
-    if (err) {
-      res.redirect("/fabrics");
-    } else res.redirect("/fabrics");
+    res.redirect("/fabrics");
   })
 })
 
@@ -81,6 +71,26 @@ function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
     return next();
   } res.redirect("/login");
+}
+
+//owner middleware
+function checkOwner(req, res, next){
+  if(req.isAuthenticated()){
+    Fabric.findById(req.params.id, function(err, fabric){
+      if (err) {
+        res.redirect("back");
+      } else {
+        //does user own the fabric?
+        if(fabric.author.id.equals(req.user._id)){
+          next();
+        } else {
+          res.send("You do not have permission to do that");
+        }
+      }
+    })
+  } else {
+    res.redirect("/login");
+  }
 }
 
 module.exports = router;
