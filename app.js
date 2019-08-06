@@ -5,6 +5,7 @@ var passport = require("passport");
 var localStrategy = require("passport-local");
 var methodOverride = require("method-override");
 
+
 var User = require("./models/user");
 var Fabric = require("./models/fabric");
 mongoose.connect("mongodb://localhost:27017/fabrics", {useNewUrlParser: true});
@@ -44,12 +45,6 @@ app.get("/", function(req, res){
 });
 
 
-//login middleware
-function isLoggedIn(req, res, next){
-  if(req.isAuthenticated()){
-    return next();
-  } res.redirect("/login");
-}
 app.listen(port, ()=>{
     console.log("Server has started");
 });
