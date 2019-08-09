@@ -40,7 +40,8 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 router.get("/:id", function(req, res){
   Fabric.findById(req.params.id, function(err, fabric){
     if (err) {
-      console.log(err);
+      req.flash("error", "Fabric not found");
+      res.redirect("back");
     } else {
       res.render("fabrics/show", {fabric: fabric});
     }
