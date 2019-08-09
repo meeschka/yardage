@@ -4,7 +4,9 @@ var middlewareObj = {};
 middlewareObj.isLoggedIn = function(req, res, next){
   if(req.isAuthenticated()){
     return next();
-  } res.redirect("/login");
+  }
+  req.flash("error", "Please login first");
+  res.redirect("/login");
 };
 middlewareObj.checkOwner = function(req, res, next){
   if(req.isAuthenticated()){
@@ -16,7 +18,8 @@ middlewareObj.checkOwner = function(req, res, next){
         if(fabric.author.id.equals(req.user._id)){
           next();
         } else {
-          res.send("You do not have permission to do that");
+          res.flash("error", "You do not have permission to do that");
+          res.redirect("back");
         }
       }
     })

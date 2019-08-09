@@ -15,6 +15,7 @@ router.post("/register", function(req, res){
       console.log(err);
       return res.render("auth/register");
     } passport.authenticate("local")(req, res, function(){
+        req.flash("success", "Successfully registered");
         res.redirect("/fabrics");
       })
   });
@@ -28,11 +29,11 @@ router.post("/login", passport.authenticate("local",
   {successRedirect:"/fabrics",
   failureRedirect:"/login"}),
   function(req, res){
-    res.send("LOGIN LOGIC HAPPENS HERE");
 })
 //logout
 router.get("/logout", function(req, res){
   req.logout();
+  req.flash("success", "Successfully logged out");
   res.redirect("/fabrics");
 })
 

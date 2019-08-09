@@ -4,7 +4,7 @@ var mongoose = require("mongoose");
 var passport = require("passport");
 var localStrategy = require("passport-local");
 var methodOverride = require("method-override");
-
+var flash = require("connect-flash");
 
 var User = require("./models/user");
 var Fabric = require("./models/fabric");
@@ -25,6 +25,7 @@ app.use(require("express-session")({
   resave: false,
   saveUninitialized: false
 }));
+app.use(flash());
 
 //userauth
 app.use(passport.initialize());
@@ -34,6 +35,8 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 app.use(function(req, res, next){
   res.locals.currentUser = req.user;
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
   next();
 });
 mongoose.set('useFindAndModify', false);

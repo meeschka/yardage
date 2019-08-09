@@ -15,14 +15,7 @@ body {
   font-size: 1.5rem;
   font-weight: 200;
   background-color: #f5d9d5;
-  animation: 1s fadein 0.5s forwards;
-  opacity: 0;
   padding-bottom: 30px;
-}
-@keyframes fadein {
-  100% {
-    opacity: 1;
-  }
 }
 #mainNav .nav-link {
   color: white;
@@ -98,7 +91,10 @@ section {
     margin: 0;
   }
 }
-
+.alert {
+  margin-top: 58px;
+  text-align: center;
+}
 h3.title{
   font-weight: 300;
   text-transform: uppercase;
@@ -232,10 +228,10 @@ footer ul li i {
 
 
 .mini-header {
-  margin-top: 30px;
   background-image: url("../assets/pinkfabric.jpg");
 }
 .mini-header h1 {
+  padding-top: 10px;
   color: white;
 }
 
