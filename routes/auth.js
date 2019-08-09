@@ -12,8 +12,8 @@ router.post("/register", function(req, res){
   var newUser = new User({username: req.body.username});
   User.register(newUser, req.body.password, function(err, user){
     if(err) {
-      req.flash("error", err);
-      res.render("auth/register");
+      req.flash("error", err.message);
+      return res.redirect("/register");
     } else {
         passport.authenticate("local")(req, res, function(){
         req.flash("success", "Welcome to Yardage "+ user.username);
