@@ -64,6 +64,7 @@ router.put("/:id", middleware.checkOwner, function(req, res){
 //destroy route
 router.delete("/:id", middleware.checkOwner, function(req, res){
   Fabric.findByIdAndRemove(req.params.id, function(err){
+    req.flash("success", "Fabric deleted");
     res.redirect("/fabrics");
   })
 })

@@ -12,12 +12,14 @@ router.post("/register", function(req, res){
   var newUser = new User({username: req.body.username});
   User.register(newUser, req.body.password, function(err, user){
     if(err) {
-      console.log(err);
-      return res.render("auth/register");
-    } passport.authenticate("local")(req, res, function(){
-        req.flash("success", "Successfully registered");
+      req.flash("error", err);
+      res.render("auth/register");
+    } else {
+        passport.authenticate("local")(req, res, function(){
+        req.flash("success", "Welcome to Yardage "+ user.username);
         res.redirect("/fabrics");
       })
+    }
   });
 })
 //login page
