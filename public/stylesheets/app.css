@@ -177,8 +177,12 @@ section p {
   max-width: 100%;
 }
 .btn-show {
-  width: 100%;
+  width: 95%;
+  justify-content: center;
   margin: 1rem;
+}
+.btn-wrapper{
+  width: 33%;
 }
 .btn-div {
   display:flex;

@@ -14,11 +14,17 @@
     </em></p>
     <% if(currentUser && fabric.author.id.equals(currentUser._id)) { %>
     <div class="btn-div">
-      <a href="/fabrics/<%=fabric._id%>" class="btn btn-primary btn-show">Make Project</a>
-      <a href="/fabrics/<%=fabric._id%>/edit" class="btn btn-primary btn-show">Edit</a>
-      <form action="/fabrics/<%=fabric._id%>?_method=DELETE" method="POST">
-        <button class="btn btn-primary btn-show">Delete</button>
-      </form>
+      <div class="btn-wrapper">
+        <a href="/fabrics/<%=fabric._id%>" class="btn btn-primary btn-show">Make Project</a>
+      </div>
+      <div class="btn-wrapper">
+        <a href="/fabrics/<%=fabric._id%>/edit" class="btn btn-primary btn-show">Edit</a>
+      </div>
+      <div class="btn-wrapper">
+        <form action="/fabrics/<%=fabric._id%>?_method=DELETE" method="POST">
+          <button class="btn btn-primary btn-show">Delete</button>
+        </form>
+      </div>
     </div>
     <% } %>
   </div>
