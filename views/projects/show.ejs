@@ -1,0 +1,32 @@
+<% include ../partials/header %>
+<section class="jumbotron text-center mini-header">
+  <h1 class="display-3"><%=project.name%></h1>
+  <a class="btn" href="/projects">Back to Projects</a>
+</section>
+<section>
+  <div class="container">
+    <img class="show" src="<%=project.image%>"/>
+    <p class="my-3">
+      <%=project.description%>
+    </p>
+    <p><em>
+      By <%=project.author.username%>
+    </em></p>
+    <% if(currentUser && project.author.id.equals(currentUser._id)) { %>
+    <div class="btn-div">
+      <div class="btn-wrapper">
+        <a href="/projects/<%=project._id%>" class="btn btn-primary btn-show">Make Project</a>
+      </div>
+      <div class="btn-wrapper">
+        <a href="/projects/<%=project._id%>/edit" class="btn btn-primary btn-show">Edit</a>
+      </div>
+      <div class="btn-wrapper">
+        <form action="/projects/<%=project._id%>?_method=DELETE" method="POST">
+          <button class="btn btn-primary btn-show">Delete</button>
+        </form>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</section>
+<% include ../partials/footer %>

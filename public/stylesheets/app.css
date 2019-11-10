@@ -8,8 +8,11 @@ body {
   position: relative
 }
 
-.fabric-form {
+.fabric-form, .project-form {
   width: 800px;
+}
+.fabric-form .tallForm, .project-form .tallForm {
+  height: 9rem;
 }
 #mainNav {
   font-size: 1.5rem;

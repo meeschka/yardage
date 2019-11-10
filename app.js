@@ -8,10 +8,12 @@ var flash = require("connect-flash");
 
 var User = require("./models/user");
 var Fabric = require("./models/fabric");
+var Project = require("./models/project");
 mongoose.connect("mongodb://localhost:27017/fabrics", {useNewUrlParser: true});
 
 var authRoutes = require("./routes/auth");
 var fabricRoutes = require("./routes/fabrics");
+var projectRoutes = require("./routes/projects");
 
 var app = express();
 var port = 3000;
@@ -42,6 +44,7 @@ app.use(function(req, res, next){
 mongoose.set('useFindAndModify', false);
 app.use(authRoutes);
 app.use("/fabrics", fabricRoutes);
+app.use("/projects", projectRoutes);
 
 app.get("/", function(req, res){
   res.render("landing");

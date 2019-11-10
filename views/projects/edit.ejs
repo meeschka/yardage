@@ -1,0 +1,17 @@
+<% include ../partials/header %>
+
+<section class="jumbotron text-center mini-header">
+  <h1 class="display-3">Edit <%=project.name%></h1>
+  <a class="btn" href="/projects">Back to Projects</a>
+</section>
+<div class="row form-row m-5">
+  <form action="/projects/<%=project._id%>?_method=PUT" method="post" class="project-form">
+    <input class="form-control my-1" type="text" name="project[name]" value="<%=project.name%>"/>
+    <input class="form-control my-1" type="text" name="project[image]" value="<%=project.image%>"/>
+    <input class="form-control my-1 tallForm" type="text" name="project[description]" value="<%=project.description%>"/>
+    <button id="delete" class="btn btn-primary btn-show btn-block">Submit</button>
+  </form>
+  </div>
+
+
+<% include ../partials/footer %>
