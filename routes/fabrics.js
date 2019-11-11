@@ -2,6 +2,27 @@ var express = require("express");
 var router = express.Router({mergeParams: true});
 var Fabric = require("../models/fabric");
 var middleware = require("../middleware");
+var multer = require('multer');
+var storage = multer.diskStorage({
+  filename: function(req, file, callback) {
+    callback(null, Date.now() + file.originalname);
+  }
+});
+var imageFilter = function (req, file, cb) {
+    // accept image files only
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+};
+var upload = multer({ storage: storage, fileFilter: imageFilter})
+
+var cloudinary = require('cloudinary');
+cloudinary.config({ 
+  cloud_name: 'meeschka', 
+  api_key: process.env.CLOUDINARY_API_KEY, 
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 //show all fabrics
 router.get("/", function(req, res){
@@ -15,22 +36,26 @@ router.get("/", function(req, res){
 
 })
 //add new fabric - post route
-router.post("/", middleware.isLoggedIn, function(req, res){
-  //get data from form, add to fabrics db
-  var newFabric = {
-    name: req.body.name,
-    image: req.body.image,
-    description: req.body.description,
-    author: {id: req.user._id, username: req.user.username}
-  }
-  Fabric.create(newFabric, function(err, fabric){
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("/fabrics");
-      //redirect back to fabrics
+router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, res){
+  cloudinary.uploader.upload(req.file.path, function(result) {
+    // add cloudinary url for the image to the new fabric object
+    //get data from form, add to fabrics db
+    var newFabric = {
+      name: req.body.name,
+      image: result.secure_url,
+      description: req.body.description,
+      author: {id: req.user._id, username: req.user.username}
     }
-  })
+    Fabric.create(newFabric, function(err, fabric){
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect("/fabrics/"+fabric.id);
+        //redirect back to fabrics
+      }
+    })
+  });
+  
 })
 //new fabric entry page
 router.get("/new", middleware.isLoggedIn, function(req, res){
