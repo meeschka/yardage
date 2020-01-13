@@ -36,14 +36,17 @@ router.get("/", function(req, res){
 
 })
 //add new fabric - post route
-router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, res){
+router.post("/", middleware.isLoggedIn, upload.single('imageUpload'), async function(req, res){
   let imageUrl;
-  if (req.body.imageType === "upload"){
-      cloudinary.uploader.upload(req.file.path, function(result) {
-        // add cloudinary url for the image to the new fabric object
-        imageUrl = result.secure_url;
-      })
-  } else imageUrl = req.body.imageUrl;
+  if (req.body.imageType === "upload" && req.file.path){
+    await cloudinary.uploader.upload(req.file.path, function(result) {
+      // add cloudinary url for the image to the new fabric object
+      imageUrl = result.secure_url;
+    })
+  } else if (req.body.imageUrl) {
+    imageUrl = req.body.imageUrl;
+  }  else imageUrl = '/assets/fabric2.jpg';
+  
   
     //get data from form, add to fabrics db
     var newFabric = {

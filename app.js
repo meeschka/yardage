@@ -29,7 +29,10 @@ app.use(require("express-session")({
   saveUninitialized: false
 }));
 app.use(flash());
-
+app.use(function (err, req, res, next) {
+  console.log('This is the invalid field ->', err.field)
+  next(err)
+})
 //userauth
 app.use(passport.initialize());
 app.use(passport.session());
