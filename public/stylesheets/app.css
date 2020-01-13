@@ -257,3 +257,9 @@ footer ul li i {
 #delete {
   display: inline;
 }
+.off {
+  display: none;
+}
+#imageTypeOptions {
+  height: 5em;
+}

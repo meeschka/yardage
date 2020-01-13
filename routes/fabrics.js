@@ -37,12 +37,18 @@ router.get("/", function(req, res){
 })
 //add new fabric - post route
 router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, res){
-  cloudinary.uploader.upload(req.file.path, function(result) {
-    // add cloudinary url for the image to the new fabric object
+  let imageUrl;
+  if (req.body.imageType === "upload"){
+      cloudinary.uploader.upload(req.file.path, function(result) {
+        // add cloudinary url for the image to the new fabric object
+        imageUrl = result.secure_url;
+      })
+  } else imageUrl = req.body.imageUrl;
+  
     //get data from form, add to fabrics db
     var newFabric = {
       name: req.body.name,
-      image: result.secure_url,
+      image: imageUrl,
       description: req.body.description,
       author: {id: req.user._id, username: req.user.username}
     }
@@ -53,9 +59,7 @@ router.post("/", middleware.isLoggedIn, upload.single('image'), function(req, re
         res.redirect("/fabrics/"+fabric.id);
         //redirect back to fabrics
       }
-    })
   });
-  
 })
 //new fabric entry page
 router.get("/new", middleware.isLoggedIn, function(req, res){
