@@ -10,7 +10,7 @@ var flash = require("connect-flash");
 var User = require("./models/user");
 var Fabric = require("./models/fabric");
 var Project = require("./models/project");
-mongoose.connect("mongodb://localhost:27017/fabrics", {useNewUrlParser: true});
+mongoose.connect("mongodb://localhost:27017/fabrics", {useNewUrlParser: true, useUnifiedTopology: true});
 
 var authRoutes = require("./routes/auth");
 var fabricRoutes = require("./routes/fabrics");

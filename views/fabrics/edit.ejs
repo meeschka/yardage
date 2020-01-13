@@ -5,13 +5,26 @@
   <a class="btn" href="/fabrics">Back to Fabrics</a>
 </section>
 <div class="row form-row m-5">
-  <form action="/fabrics/<%=fabric._id%>?_method=PUT" method="post" class="fabric-form">
+  <form action="/fabrics/<%=fabric._id%>?_method=PUT" method="post" class="fabric-form" enctype="multipart/form-data">
     <input class="form-control my-1" type="text" name="fabric[name]" value="<%=fabric.name%>"/>
-    <input class="form-control my-1" type="text" name="fabric[image]" value="<%=fabric.image%>"/>
+    <img src='<%=fabric.image%>' class='show my-3'>
+    <div id="imageTypeOptions" class='form-control justify-content-around'>
+      <div>Select your preferred image input method:</div>
+      <div class='d-flex'>
+        <div class='d-flex w-50 justify-content-around'>
+          <label for="URL" class='my-2 radio-inline'><input class="my-1 mr-2" type="radio" name="imageType" id="imageUrlRadio" value="url" checked>Image URL</label>
+          <label for="upload" class='my-2 radio-inline'><input class="my-1 mr-2" type="radio" name="imageType" id="imageUploadRadio" value="upload">Upload an Image</label>
+        </div>
+        <div class='w-50'>
+          <input class="my-1 w-100" type="text" name="imageUrl" id="imageUrl" placeholder="Your image URL"/>
+          <input class="my-1 off w-100" type="file" name="imageUpload" id="imageUpload" accept="image/*"/>
+        </div>
+      </div>
+    </div>
+    <!-- <input class="form-control my-1" type="text" name="fabric[image]" value="<%=fabric.image%>"/> -->
     <input class="form-control my-1 tallForm" type="text" name="fabric[description]" value="<%=fabric.description%>"/>
     <button id="delete" class="btn btn-primary btn-show btn-block">Submit</button>
   </form>
   </div>
-
-
+  <script src='/scripts/form-control.js' defer></script>
 <% include ../partials/footer %>

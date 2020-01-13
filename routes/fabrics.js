@@ -38,10 +38,16 @@ router.get("/", function(req, res){
 //add new fabric - post route
 router.post("/", middleware.isLoggedIn, upload.single('imageUpload'), async function(req, res){
   let imageUrl;
+  let imageId = 1;
   if (req.body.imageType === "upload" && req.file.path){
-    await cloudinary.uploader.upload(req.file.path, function(result) {
+    await cloudinary.v2.uploader.upload(req.file.path, function(err, result) {
+      if (err) {
+        req.flash('error', err.message);
+        return res.redirect('back');
+      }
       // add cloudinary url for the image to the new fabric object
       imageUrl = result.secure_url;
+      imageId = result.public_id;
     })
   } else if (req.body.imageUrl) {
     imageUrl = req.body.imageUrl;
@@ -52,6 +58,7 @@ router.post("/", middleware.isLoggedIn, upload.single('imageUpload'), async func
     var newFabric = {
       name: req.body.name,
       image: imageUrl,
+      imageId: imageId,
       description: req.body.description,
       author: {id: req.user._id, username: req.user.username}
     }
@@ -87,18 +94,71 @@ router.get("/:id/edit", middleware.checkOwner, function(req, res){
   })
 })
 //update fabric route
-router.put("/:id", middleware.checkOwner, function(req, res){
-  Fabric.findByIdAndUpdate(req.params.id, req.body.fabric, function(err, fabric){
-    res.redirect("/fabrics/"+req.params.id);
+router.put("/:id", middleware.checkOwner, upload.single('imageUpload'), function(req, res){
+  Fabric.findById(req.params.id, async function(err, fabric){
+    if (err) {
+      req.flash('error', err.message);
+      res.redirect('back');
+    } else {
+      if (req.body.imageType === 'upload' && req.file.path){
+        try {
+          await cloudinary.v2.uploader.destroy(fabric.imageId);
+          let result = await cloudinary.v2.uploader.upload(req.file.path);
+          fabric.imageId = result.public_id;
+          fabric.image = result.secure_url;
+        } catch (err) {
+          req.flash('error', err.message);
+          return res.redirect('back');
+        }
+      } else if (req.body.imageUrl) {
+        req.body.fabric.image = req.body.imageUrl;
+      }
+    }
+    fabric.name = req.body.name;
+    fabric.description = req.body.description;
+    fabric.save();
+    req.flash('success', 'Successfully updated!');
+    res.redirect(`/fabrics/${fabric._id}`);
   })
+  // if (req.body.imageType === "upload" && req.file.path){
+  //   await cloudinary.v2.uploader.upload(req.file.path, function(err, result) {
+  //     // add cloudinary url for the image to the new fabric object
+  //     req.body.fabric.image = result.secure_url;
+  //     req.body.fabric.imageId = result.public_id;
+  //   })
+  // } else if (req.body.imageUrl) {
+    
+  // }  else req.body.fabric.image = '/assets/fabric2.jpg';
+  // Fabric.findByIdAndUpdate(req.params.id, req.body.fabric, function(err, fabric){
+  //   res.redirect("/fabrics/"+req.params.id);
+  // })
 })
 
 //destroy route
 router.delete("/:id", middleware.checkOwner, function(req, res){
-  Fabric.findByIdAndRemove(req.params.id, function(err){
-    req.flash("success", "Fabric deleted");
-    res.redirect("/fabrics");
+  Fabric.findById(req.params.id, async function(err, fabric){
+    if (err) {
+      req.flash('error', err.message);
+      return res.redirect('back');
+    }
+    try {
+      if (fabric.imageId !== 1 ) {
+        await cloudinary.v2.uploader.destroy(fabric.imageId);
+      }
+      fabric.remove();
+      req.flash('success', 'Fabric deleted successfully!');
+      res.redirect("/fabrics");
+    } catch (err) {
+      if (err) {
+        req.flash('error', err.message);
+        return res.redirect('back');
+      }
+    }
   })
+  // Fabric.findByIdAndRemove(req.params.id, function(err){
+  //   req.flash("success", "Fabric deleted");
+    
+  // })
 })
 
 module.exports = router;
