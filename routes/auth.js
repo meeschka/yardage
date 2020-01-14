@@ -1,31 +1,14 @@
-var express = require("express");
-var router = express.Router();
-var User = require("../models/user");
-var passport = require("passport");
+const express = require("express");
+var router = express.Router({mergeParams: true});
+const passport = require("passport");
+const authCtrl = require('../controllers/auth')
 
 //register page
-router.get("/register", function(req, res){
-  res.render("auth/register");
-})
+router.get("/register", authCtrl.register)
 //register logic
-router.post("/register", function(req, res){
-  var newUser = new User({username: req.body.username});
-  User.register(newUser, req.body.password, function(err, user){
-    if(err) {
-      req.flash("error", err.message);
-      return res.redirect("/register");
-    } else {
-        passport.authenticate("local")(req, res, function(){
-        req.flash("success", "Welcome to Yardage "+ user.username);
-        res.redirect("/fabrics");
-      })
-    }
-  });
-})
+router.post("/register", authCtrl.addUser)
 //login page
-router.get("/login", function(req, res){
-  res.render("auth/login");
-})
+router.get("/login", authCtrl.login)
 //login logic
 router.post("/login", passport.authenticate("local",
   {successRedirect:"/fabrics",
@@ -33,10 +16,6 @@ router.post("/login", passport.authenticate("local",
   function(req, res){
 })
 //logout
-router.get("/logout", function(req, res){
-  req.logout();
-  req.flash("success", "Successfully logged out");
-  res.redirect("/fabrics");
-})
+router.get("/logout", authCtrl.logout)
 
 module.exports = router;
